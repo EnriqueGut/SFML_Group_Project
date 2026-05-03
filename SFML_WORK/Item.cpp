@@ -1,4 +1,5 @@
-#include "item.h"
+
+#include "Item.h"
 #include <string>
 #include <iostream>
 
@@ -70,3 +71,4 @@ string Item::getDescription()const
 {
 	return description;
 }
+

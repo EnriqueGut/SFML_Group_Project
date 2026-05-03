@@ -28,3 +28,5 @@ private:
 	sf::RectangleShape shape;
 	Item inventory[4];
 };
+
+

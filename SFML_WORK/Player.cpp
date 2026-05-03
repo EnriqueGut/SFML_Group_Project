@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -13,6 +14,7 @@ Player::Player() : shape(Vector2f(10.f, 10.f))
     inventory[0] = {Item("Item", 0, 0 , 0, "This is an Item")};
 
 }
+
 Player::Player(int hp, int maxHP, int defense, int attack, Item inventory[])
 {
     RenderWindow window(VideoMode({ 640, 480 }), "Title", Style::Default);
@@ -26,46 +28,57 @@ Player::Player(int hp, int maxHP, int defense, int attack, Item inventory[])
     setAttack(attack);
     setInventory(inventory);
 }
+
 int Player::getHp()const
 {
     return hp;
 }
+
 int Player::getMaxHp()const
 {
     return maxHP;
 }
+
 int Player::getDefense()const
 {
     return defense;
 }
+
 int Player::getAttack()const
 {
     return attack;
 }
+/*
 Item Player::getInventory(int index)const
 {
     return inventory[index];
 }
+*/
 void Player::setHp(int hp)
 {
     this->hp = hp;
 }
+
 void Player::setMaxHp(int maxHP)
 {
     this->maxHP = maxHP;
 }
+
 void Player::setDefense(int defense)
 {
     this->defense = defense;
 }
+
 void Player::setAttack(int attack)
 {
     this->attack = attack;
 }
+
 void Player::setInventory(Item inventory[])
 {
     inventory;
 }
+
 /*
 void Player::attackEnemy()
 {
@@ -99,3 +112,4 @@ void Player::draw(RenderWindow& window)const
 {
     window.draw(shape);
 }
+
