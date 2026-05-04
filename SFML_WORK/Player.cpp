@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -24,42 +25,52 @@ Player::Player(int hp, int maxHP, int defense, int attack, Item inventory[])
     setAttack(attack);
     setInventory(inventory);
 }
+
 int Player::getHp()const
 {
     return hp;
 }
+
 int Player::getMaxHp()const
 {
     return maxHP;
 }
+
 int Player::getDefense()const
 {
     return defense;
 }
+
 int Player::getAttack()const
 {
     return attack;
 }
+/*
 Item Player::getInventory(int index)const
 {
     return inventory[index];
 }
+*/
 void Player::setHp(int hp)
 {
     this->hp = hp;
 }
+
 void Player::setMaxHp(int maxHP)
 {
     this->maxHP = maxHP;
 }
+
 void Player::setDefense(int defense)
 {
     this->defense = defense;
 }
+
 void Player::setAttack(int attack)
 {
     this->attack = attack;
 }
+
 void Player::setInventory(Item inventory[])
 {
     for (int i = 0; i < 3; i++)
@@ -67,6 +78,7 @@ void Player::setInventory(Item inventory[])
         this->inventory[i] = inventory[i];
     }
 }
+
 /*
 void Player::attackEnemy(Enemy Enemy)
 {
@@ -111,3 +123,4 @@ void Player::draw(RenderWindow& window)const
 {
     window.draw(shape);
 }
+

@@ -26,5 +26,7 @@ public:
 private:
 	int hp, maxHP, defense, attack;
 	sf::RectangleShape shape;
-	Item inventory[3];
+	Item inventory[4];
 };
+
+
