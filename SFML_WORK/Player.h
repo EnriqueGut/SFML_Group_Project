@@ -18,9 +18,9 @@ public:
 	void setDefense(int defense);
 	void setAttack(int attack);
 	void setInventory(Item inventory[]);
-	//void attackEnemy();
-	//void takeDamge();
-	//void useItem();
+	//void attackEnemy(Enemy enemy);
+	//void takeDamge(Enemy enemy);
+	void useItem(Item item);
 	void update(float dt);
 	void draw(sf::RenderWindow& window)const;
 private:
