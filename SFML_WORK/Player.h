@@ -18,7 +18,6 @@ public:
 	void setAttack(int attack);
 	//void attackEnemy();
 	//void takeDamge();
-	//void useItem();
 	void update(float dt);
 	void draw(sf::RenderWindow& window)const;
 private:
