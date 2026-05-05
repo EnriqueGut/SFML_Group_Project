@@ -11,19 +11,15 @@ Player::Player() : shape(Vector2f(10.f, 10.f))
     maxHP = 0;
     defense = 0;
     attack = 0;
-    inventory[0] = Item("Item", 0, 0, 0, "This is an Item");
-    inventory[1] = Item("Item2", 0, 0, 0, "This is an item2");
-    inventory[2] = Item("Item3", 0, 0, 0, "This is an Item3");
 }
 
-Player::Player(int hp, int maxHP, int defense, int attack, Item inventory[])
+Player::Player(int hp, int maxHP, int defense, int attack)
 {
     shape.setPosition({100.f,100.f});
     setHp(hp);
     setMaxHp(maxHP);
     setDefense(defense);
     setAttack(attack);
-    setInventory(inventory);
 }
 
 int Player::getHp()const
@@ -45,12 +41,7 @@ int Player::getAttack()const
 {
     return attack;
 }
-/*
-Item Player::getInventory(int index)const
-{
-    return inventory[index];
-}
-*/
+
 void Player::setHp(int hp)
 {
     this->hp = hp;
@@ -71,13 +62,6 @@ void Player::setAttack(int attack)
     this->attack = attack;
 }
 
-void Player::setInventory(Item inventory[])
-{
-    for (int i = 0; i < 3; i++)
-    {
-        this->inventory[i] = inventory[i];
-    }
-}
 
 /*
 void Player::attackEnemy(Enemy Enemy)

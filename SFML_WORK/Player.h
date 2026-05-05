@@ -7,26 +7,22 @@ class Player
 {
 public:
 	Player();
-	Player(int hp, int maxHP, int defense, int attack, Item inventory[]);
+	Player(int hp, int maxHP, int defense, int attack);
 	int getHp()const;
 	int getMaxHp()const;
 	int getDefense()const;
 	int getAttack()const;
-	Item getInventory(int index)const;
 	void setHp(int hp);
 	void setMaxHp(int maxHP);
 	void setDefense(int defense);
 	void setAttack(int attack);
-	void setInventory(Item inventory[]);
-	//void attackEnemy(Enemy enemy);
-	//void takeDamge(Enemy enemy);
-	void useItem(Item item);
+	//void attackEnemy();
+	//void takeDamge();
 	void update(float dt);
 	void draw(sf::RenderWindow& window)const;
 private:
 	int hp, maxHP, defense, attack;
 	sf::RectangleShape shape;
-	Item inventory[4];
 };
 
 
