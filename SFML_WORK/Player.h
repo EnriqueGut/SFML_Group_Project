@@ -23,6 +23,8 @@ public:
 private:
 	int hp, maxHP, defense, attack;
 	sf::RectangleShape shape;
+	sf:: Sprite sprite;
+	sf::Texture texture;
 };
 
 

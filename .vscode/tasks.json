@@ -2,18 +2,32 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang build active file",
-            "command": "/usr/bin/clang",
-            "args": [
-                "-fcolor-diagnostics",
-                "-fansi-escape-codes",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
+            "label": "C/C++: cl.exe build active file",
+            "command": "cl.exe",
+           "args": [
+                    "/EHsc",
+                    "/Zi",
+                    "/nologo",
+                    "/std:c++17",
+                    "/I",
+                    "C:/Users/eguti/Downloads/SFML-3.1.0-windows-vc17-64-bit/SFML-3.1.0/include",
+                    "${workspaceFolder}/SFML_WORK/GameDriver.cpp",
+                    "${workspaceFolder}/SFML_WORK/Game.cpp",
+                    "${workspaceFolder}/SFML_WORK/Player.cpp",
+                    "${workspaceFolder}/SFML_WORK/Map.cpp",
+                    "${workspaceFolder}/SFML_WORK/Item.cpp",
+                    "${workspaceFolder}/SFML_WORK/Battle.cpp",
+                    "/Fe:",
+                    "${fileDirname}/${fileBasenameNoExtension}.exe",
+
+                    "/link",
+                    "/LIBPATH:C:/Users/eguti/Downloads/SFML-3.1.0-windows-vc17-64-bit/SFML-3.1.0/lib",
+                    "sfml-graphics.lib",
+                    "sfml-window.lib",
+                    "sfml-system.lib"
+                ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}/SFML_WORK"
             },
             "problemMatcher": [
                 "$gcc"
