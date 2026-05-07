@@ -1,11 +1,18 @@
-
 #include "Player.h"
+#include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-Player::Player() : shape(Vector2f(10.f, 10.f))
+Player::Player() : sprite(texture)
 {
-    shape.setPosition({ 100.f,100.f });
+    texture.loadFromFile("C:/Users/eguti/CSS-2A/SFML_Group_Project/SFML_WORK/Assets/Characters/Basic Charakter Spritesheet.png");
+  
+    sprite.setTexture(texture);
+
+    sprite.setTextureRect(sf::IntRect({17,16},{16,16}));
+
+    sprite.setScale({3.f, 3.f});
+    sprite.setPosition({100.f, 100.f});
 
     hp = 0;
     maxHP = 0;
@@ -13,9 +20,9 @@ Player::Player() : shape(Vector2f(10.f, 10.f))
     attack = 0;
 }
 
-Player::Player(int hp, int maxHP, int defense, int attack)
+Player::Player(int hp, int maxHP, int defense, int attack) : sprite(texture)
 {
-    shape.setPosition({100.f,100.f});
+    sprite.setPosition({100.f,100.f});
     setHp(hp);
     setMaxHp(maxHP);
     setDefense(defense);
@@ -74,20 +81,6 @@ void Player::takeDamge(Enemy enemy)
     hp - enemy.getAttack();
 }
 */
-void Player::useItem(Item item)
-{
-    if (hp + item.getHealth() <= maxHP)
-    {
-        hp = hp + item.getHealth();
-    }
-    else if (hp + item.getHealth() > maxHP)
-    {
-        hp = maxHP;
-    }
-    defense = defense + item.getDefense();
-    attack = attack + item.getAttack();
-}
-
 void Player::update(float dt)
 {
 
@@ -95,16 +88,28 @@ void Player::update(float dt)
     float distance = speed * dt;
 
     if (Keyboard::isKeyPressed(Keyboard::Scan::A))
-        shape.move({ -distance, 0.f });
+    {
+        sprite.move({ -distance, 0.f });
+        sprite.setTextureRect(sf::IntRect({17,112},{16,16}));
+    }
     if (Keyboard::isKeyPressed(Keyboard::Scan::D))
-        shape.move({ distance, 0.f });
+    {
+        sprite.move({ distance, 0.f });
+        sprite.setTextureRect(sf::IntRect({17,160},{16,16}));
+    }
     if (Keyboard::isKeyPressed(Keyboard::Scan::W))
-        shape.move({ 0.f ,-distance });
+    {
+        sprite.move({ 0.f ,-distance });
+        sprite.setTextureRect(sf::IntRect({17,64},{16,16}));
+    }
     if (Keyboard::isKeyPressed(Keyboard::Scan::S))
-        shape.move({ 0.f ,distance });
+    {
+        sprite.move({ 0.f ,distance });
+        sprite.setTextureRect(sf::IntRect({17,16},{17,17}));
+    }
 }
 void Player::draw(RenderWindow& window)const
 {
-    window.draw(shape);
+    window.draw(sprite);
 }
 
