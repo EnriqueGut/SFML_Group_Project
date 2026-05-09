@@ -3,13 +3,18 @@
 #include "Game.h"
 #include "Map.h"
 #include "Player.h"
+#include "battle.h"
 #include <iostream>
 
 
-Game::Game(): window(sf::VideoMode({400, 400}), "Title", sf::Style::Default)
+Game::Game(): window(sf::VideoMode({810, 810}), "Title", sf::Style::Default)
 {
     fps_max = 60.f;
     dt_min = 1.f / fps_max;
+    player.setHp(100);
+    player.setAttack(10);
+    player.setMaxHp(100);
+    player.setDefense(5);
 }
 
 
@@ -45,30 +50,44 @@ void Game::processEvents()
 
 void Game::update(float dt)
 {
-    
-    player.update(dt);
+    if (!inBattle)
+    {
+        player.update(dt);
+        
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::B))
+        {
+            inBattle = true;
+        }
+    }
+
+    else 
+    {
+        battle.update(dt, player);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
+        {
+            battle.playerAttack(player);
+        }
+        
+        if(battle.enemyDefeated())
+        {
+            inBattle = false;
+        }
+    }
 
 }
 
 void Game::render()
 {
     window.clear(sf::Color(64, 64, 64));
+    
+
     map.draw(window);
     player.draw(window);
+    
+    if (inBattle)
+    {
+        battle.draw(window);
+    }
+    
     window.display();
-}
-
-void Game::startBattle()
-{
-    
-}
-
-bool Game::inBattle()
-{
-    return false;
-}
-
-void Game::endBattle()
-{
-    
 }

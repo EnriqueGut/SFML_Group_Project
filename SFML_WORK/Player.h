@@ -1,6 +1,7 @@
 #pragma once
 #include "Item.h"
 #include <SFML/Graphics.hpp>
+#include <string>
 using namespace std;
 
 class Player
@@ -17,12 +18,12 @@ public:
 	void setDefense(int defense);
 	void setAttack(int attack);
 	//void attackEnemy();
-	//void takeDamge();
+	void takeDamge(int damage);
+	void loadSprite();
 	void update(float dt);
 	void draw(sf::RenderWindow& window)const;
 private:
 	int hp, maxHP, defense, attack;
-	sf::RectangleShape shape;
 	sf:: Sprite sprite;
 	sf::Texture texture;
 };

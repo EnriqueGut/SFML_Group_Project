@@ -42,9 +42,9 @@ void Map::draw(sf::RenderWindow& window)
     sprite7.setTextureRect(sf::IntRect({14, 30}, {16, 14}));
     sprite8.setTextureRect(sf::IntRect({30, 14}, {14, 16}));
 
-    for(int y = 0; y < height ;y++)
+    for(int y = 0; y < height; y++)
     {
-        for(int x = 0; x < width ;x++)
+        for(int x = 0; x < width; x++)
         {
             if(tileGrid[y][x] == 0)
             {

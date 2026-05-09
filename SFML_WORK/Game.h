@@ -12,9 +12,7 @@ public:
     void processEvents();
     void update(float dt);
     void render();
-    void startBattle();
-    bool inBattle();
-    void endBattle();
+    void loadSprite();
 private:
     
     Player player;
@@ -22,7 +20,6 @@ private:
     sf::RenderWindow window;
     float fps_max;
     float dt_min;
-    //std::vector<Enemy> enemies;
-    //Battle battle;
-     
+    bool inBattle = false;
+    Battle battle;
 };

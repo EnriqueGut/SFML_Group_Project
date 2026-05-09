@@ -5,15 +5,7 @@ using namespace sf;
 
 Player::Player() : sprite(texture)
 {
-    texture.loadFromFile("C:/Users/eguti/CSS-2A/SFML_Group_Project/SFML_WORK/Assets/Characters/Basic Charakter Spritesheet.png");
-  
-    sprite.setTexture(texture);
-
-    sprite.setTextureRect(sf::IntRect({17,16},{16,16}));
-
-    sprite.setScale({3.f, 3.f});
-    sprite.setPosition({100.f, 100.f});
-
+    loadSprite();
     hp = 0;
     maxHP = 0;
     defense = 0;
@@ -22,7 +14,7 @@ Player::Player() : sprite(texture)
 
 Player::Player(int hp, int maxHP, int defense, int attack) : sprite(texture)
 {
-    sprite.setPosition({100.f,100.f});
+    loadSprite();
     setHp(hp);
     setMaxHp(maxHP);
     setDefense(defense);
@@ -70,17 +62,35 @@ void Player::setAttack(int attack)
 }
 
 
-/*
-void Player::attackEnemy(Enemy Enemy)
+void Player::takeDamge(int damage)
 {
+    int actualDamage = damage - defense;
+
+    if (actualDamage <= 0)
+    {
+        actualDamage = 0;
+    }
+    
+    hp -= actualDamage;
+
+    if(hp <= 0)
+    {
+        hp = 0;
+    }
 
 }
 
-void Player::takeDamge(Enemy enemy)
-{
-    hp - enemy.getAttack();
+void Player::loadSprite() 
+{    
+    texture.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
+    sprite.setTexture(texture);
+
+    sprite.setTextureRect(sf::IntRect({17,16},{16,16}));
+
+    sprite.setScale({3.f, 3.f});
+    sprite.setPosition({100.f, 100.f});
+
 }
-*/
 void Player::update(float dt)
 {
 
@@ -92,17 +102,17 @@ void Player::update(float dt)
         sprite.move({ -distance, 0.f });
         sprite.setTextureRect(sf::IntRect({17,112},{16,16}));
     }
-    if (Keyboard::isKeyPressed(Keyboard::Scan::D))
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::D))
     {
         sprite.move({ distance, 0.f });
         sprite.setTextureRect(sf::IntRect({17,160},{16,16}));
     }
-    if (Keyboard::isKeyPressed(Keyboard::Scan::W))
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::W))
     {
         sprite.move({ 0.f ,-distance });
         sprite.setTextureRect(sf::IntRect({17,64},{16,16}));
     }
-    if (Keyboard::isKeyPressed(Keyboard::Scan::S))
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::S))
     {
         sprite.move({ 0.f ,distance });
         sprite.setTextureRect(sf::IntRect({17,16},{17,17}));
