@@ -10,9 +10,7 @@ Map::Map()
     height = 54;
     tileSize = 15;
     tileGrid = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
-    GRASS = sf::Texture ("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/Assets/Tilesets/Grass.png");
-    
-    loadMap();
+    GRASS = sf::Texture ("Assets/Tilesets/Grass.png");
 }
 
 void Map::loadMap()
@@ -89,9 +87,9 @@ void Map::draw(sf::RenderWindow& window)
     sprite7.setTextureRect(sf::IntRect({14, 32}, {16, 14}));
     sprite8.setTextureRect(sf::IntRect({32, 14}, {14, 16}));
 
-    for(int y = 0; y < height ;y++)
+    for(int y = 0; y < height; y++)
     {
-        for(int x = 0; x < width ;x++)
+        for(int x = 0; x < width; x++)
         {
             if(tileGrid[y][x] == 0)
             {

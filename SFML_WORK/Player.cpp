@@ -80,9 +80,9 @@ void Player::takeDamge(int damage)
 
 }
 
-void Player::loadSprite()
-{
-    texture.loadFromFile("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Assets/Characters/Basic Charakter Spritesheet.png");
+void Player::loadSprite() 
+{    
+    texture.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
     sprite.setTexture(texture);
 
     sprite.setTextureRect(sf::IntRect({17,16},{16,16}));

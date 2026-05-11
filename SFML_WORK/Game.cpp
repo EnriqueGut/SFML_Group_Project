@@ -63,6 +63,20 @@ void Game::update(float dt)
         }
     }
 
+    else 
+    {
+        battle.update(dt, player);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
+        {
+            battle.playerAttack(player);
+        }
+        
+        if(battle.enemyDefeated())
+        {
+            inBattle = false;
+        }
+    }
+
     else
     {
         battle.update(dt, player);

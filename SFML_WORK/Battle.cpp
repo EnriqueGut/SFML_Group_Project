@@ -8,18 +8,18 @@
 using namespace std;
 
 Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite),menu(font), info(font)
-{
+{ 
     overlay.setSize({810.f, 810.f});
     overlay.setFillColor(sf::Color(0,0,0,150));
     
-    actionTexture.loadFromFile("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Assets/Objects/inventory_example.png");
+    actionTexture.loadFromFile("C:/Users/eguti/CSS-2A/SFML_Group_Project/SFML_WORK/Assets/Objects/inventory_example.png");
     actionSprite.setTexture(actionTexture);
     actionSprite.setTextureRect(sf::IntRect({0,24}, {352, 96}));
     actionSprite.setPosition({55.f,550.f});
     actionSprite.setScale({2.f,2.f});
     
     
-    battleSprite.loadFromFile("'/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Assets/Characters/Basic Charakter Spritesheet.png'");
+    battleSprite.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
     playerBattleSprite.setTexture(battleSprite);
 
     playerBattleSprite.setTextureRect(sf::IntRect({17,160},{16,16}));
@@ -28,7 +28,7 @@ Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite),
     playerBattleSprite.setPosition({60.f, 200.f});
 
 
-    font.openFromFile("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Assets/fonts/pixelFont-7-8x14-sproutLands.ttf");
+    font.openFromFile("Assets/Font/PIXEARG_.TTF");
 
     menu.setString("A - Attack Enemy\nR - Run");
     menu.setCharacterSize(28);
