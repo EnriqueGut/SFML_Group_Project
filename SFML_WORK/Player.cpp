@@ -1,21 +1,20 @@
-
 #include "Player.h"
+#include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-Player::Player() : shape(Vector2f(10.f, 10.f))
+Player::Player() : sprite(texture)
 {
-    shape.setPosition({ 100.f,100.f });
-
+    loadSprite();
     hp = 0;
     maxHP = 0;
     defense = 0;
     attack = 0;
 }
 
-Player::Player(int hp, int maxHP, int defense, int attack)
+Player::Player(int hp, int maxHP, int defense, int attack) : sprite(texture)
 {
-    shape.setPosition({100.f,100.f});
+    loadSprite();
     setHp(hp);
     setMaxHp(maxHP);
     setDefense(defense);
@@ -63,31 +62,35 @@ void Player::setAttack(int attack)
 }
 
 
-/*
-void Player::attackEnemy(Enemy Enemy)
+void Player::takeDamge(int damage)
 {
+    int actualDamage = damage - defense;
 
-}
-
-void Player::takeDamge(Enemy enemy)
-{
-    hp - enemy.getAttack();
-}
-*/
-void Player::useItem(Item item)
-{
-    if (hp + item.getHealth() <= maxHP)
+    if (actualDamage <= 0)
     {
-        hp = hp + item.getHealth();
+        actualDamage = 0;
     }
-    else if (hp + item.getHealth() > maxHP)
+    
+    hp -= actualDamage;
+
+    if(hp <= 0)
     {
-        hp = maxHP;
+        hp = 0;
     }
-    defense = defense + item.getDefense();
-    attack = attack + item.getAttack();
+
 }
 
+void Player::loadSprite()
+{
+    texture.loadFromFile("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Assets/Characters/Basic Charakter Spritesheet.png");
+    sprite.setTexture(texture);
+
+    sprite.setTextureRect(sf::IntRect({17,16},{16,16}));
+
+    sprite.setScale({3.f, 3.f});
+    sprite.setPosition({100.f, 100.f});
+
+}
 void Player::update(float dt)
 {
 
@@ -95,16 +98,27 @@ void Player::update(float dt)
     float distance = speed * dt;
 
     if (Keyboard::isKeyPressed(Keyboard::Scan::A))
-        shape.move({ -distance, 0.f });
-    if (Keyboard::isKeyPressed(Keyboard::Scan::D))
-        shape.move({ distance, 0.f });
-    if (Keyboard::isKeyPressed(Keyboard::Scan::W))
-        shape.move({ 0.f ,-distance });
-    if (Keyboard::isKeyPressed(Keyboard::Scan::S))
-        shape.move({ 0.f ,distance });
+    {
+        sprite.move({ -distance, 0.f });
+        sprite.setTextureRect(sf::IntRect({17,112},{16,16}));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::D))
+    {
+        sprite.move({ distance, 0.f });
+        sprite.setTextureRect(sf::IntRect({17,160},{16,16}));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::W))
+    {
+        sprite.move({ 0.f ,-distance });
+        sprite.setTextureRect(sf::IntRect({17,64},{16,16}));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Scan::S))
+    {
+        sprite.move({ 0.f ,distance });
+        sprite.setTextureRect(sf::IntRect({17,16},{17,17}));
+    }
 }
 void Player::draw(RenderWindow& window)const
 {
-    window.draw(shape);
+    window.draw(sprite);
 }
-
