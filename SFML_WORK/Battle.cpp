@@ -71,15 +71,15 @@ void Battle::playerAttack(Player& player)
     //enemy.takeDamage(damage);
 
     info.setString("Player attcked for " + to_string(damage) +
-                    " damage.\nEnemy HP: " ); /*enemy.getHP()*/ 
+                    " damage.\nEnemy HP: " ); /*enemy.getHP()*/
     
 }
 
 void Battle::enemyTurn(Player& player)
 {
-    cout << "Enemy attacked!\n" 
+    cout << "Enemy attacked!\n"
         << "Player HP: " << player.getHp() << "/" << player.getMaxHp() << endl;
-}  
+}
       
 bool Battle::enemyDefeated()const
 {

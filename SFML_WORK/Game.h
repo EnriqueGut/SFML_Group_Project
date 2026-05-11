@@ -1,9 +1,10 @@
+#pragma once
 #include <vector>
 #include "Player.h"
-//#include "Enemy.h"
+#include "Enemy.h"
 #include "Map.h"
 #include "Battle.h"
-
+#include <SFML/Audio.hpp>
 class Game
 {
 public:
@@ -12,7 +13,9 @@ public:
     void processEvents();
     void update(float dt);
     void render();
-    void loadSprite();
+    void startBattle();
+    void Music();
+
 private:
     
     Player player;
@@ -20,6 +23,9 @@ private:
     sf::RenderWindow window;
     float fps_max;
     float dt_min;
+    sf::Music overworldMusic;
+    //std::vector<Enemy> enemies;
     bool inBattle = false;
     Battle battle;
+     
 };

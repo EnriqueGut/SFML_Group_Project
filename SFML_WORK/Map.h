@@ -1,5 +1,7 @@
 #pragma once
 #include "Player.h"
+#include "Enemy.h"
+
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -21,4 +23,5 @@ private:
     sf::Texture GRASS;
     int width;
     int height;
+    bool walkable;
 };

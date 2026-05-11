@@ -2,7 +2,7 @@
 //  Group_Project1
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "player.h"
+#include "Player.h"
 class Battle
 {
     public:

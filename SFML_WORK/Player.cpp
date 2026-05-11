@@ -122,4 +122,3 @@ void Player::draw(RenderWindow& window)const
 {
     window.draw(sprite);
 }
-
