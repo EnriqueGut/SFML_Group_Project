@@ -17,10 +17,10 @@ public:
 	void setMaxHp(int maxHP);
 	void setDefense(int defense);
 	void setAttack(int attack);
-	//void attackEnemy();
 	void takeDamge(int damage);
 	void loadSprite();
 	void update(float dt);
+	sf::Vector2f getPosition()const;
 	void draw(sf::RenderWindow& window)const;
 private:
 	int hp, maxHP, defense, attack;

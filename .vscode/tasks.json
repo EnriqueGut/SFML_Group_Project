@@ -17,6 +17,7 @@
                     "${workspaceFolder}/SFML_WORK/Map.cpp",
                     "${workspaceFolder}/SFML_WORK/Item.cpp",
                     "${workspaceFolder}/SFML_WORK/Battle.cpp",
+                    "${workspaceFolder}/SFML_WORK/Enemy.cpp",
                     "/Fe:",
                     "${fileDirname}/${fileBasenameNoExtension}.exe",
 
@@ -24,7 +25,8 @@
                     "/LIBPATH:C:/Users/eguti/Downloads/SFML-3.1.0-windows-vc17-64-bit/SFML-3.1.0/lib",
                     "sfml-graphics.lib",
                     "sfml-window.lib",
-                    "sfml-system.lib"
+                    "sfml-system.lib",
+                    "sfml-audio.lib"
                 ],
             "options": {
                 "cwd": "${workspaceFolder}/SFML_WORK"

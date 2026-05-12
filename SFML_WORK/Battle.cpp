@@ -2,17 +2,17 @@
 //  Group_Project1
 #include "Battle.h"
 #include "Player.h"
-//#include "enemy.h"
+#include "Enemy.h"
 #include <iostream>
 
 using namespace std;
 
-Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite),menu(font), info(font)
+Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite), enemyBattleSprite(enemyBattle),menu(font),info(font)
 { 
     overlay.setSize({810.f, 810.f});
     overlay.setFillColor(sf::Color(0,0,0,150));
     
-    actionTexture.loadFromFile("C:/Users/eguti/CSS-2A/SFML_Group_Project/SFML_WORK/Assets/Objects/inventory_example.png");
+    actionTexture.loadFromFile("Assets/Objects/inventory_example.png");
     actionSprite.setTexture(actionTexture);
     actionSprite.setTextureRect(sf::IntRect({0,24}, {352, 96}));
     actionSprite.setPosition({55.f,550.f});
@@ -21,11 +21,15 @@ Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite),
     
     battleSprite.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
     playerBattleSprite.setTexture(battleSprite);
-
     playerBattleSprite.setTextureRect(sf::IntRect({17,160},{16,16}));
-
     playerBattleSprite.setScale({20.f, 20.f});
     playerBattleSprite.setPosition({60.f, 200.f});
+
+    enemyBattle.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
+    enemyBattleSprite.setTexture(battleSprite);
+    enemyBattleSprite.setTextureRect(sf::IntRect({17,112},{16,16}));
+    enemyBattleSprite.setScale({20.f, 20.f});
+    enemyBattleSprite.setPosition({400.f, 200.f});
 
 
     font.openFromFile("Assets/Font/PIXEARG_.TTF");
@@ -40,48 +44,68 @@ Battle::Battle() : actionSprite(actionTexture),playerBattleSprite(battleSprite),
     info.setFillColor(sf::Color::White);
     info.setPosition({90.f,640.f});
 
-
+    heldKey = false;
 }
 
-void Battle::update(float dt, Player& player)
+void Battle::update(float dt, Player& player, Enemy& enemy)
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A))
+    
+    bool attackKeyNow = sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A);
+
+    if (attackKeyNow && !heldKey)
     {
-        playerAttack(player);
+        playerAttack(player, enemy);
+
+        if (!(enemy.getHp() <= 0))
+        {
+            enemyTurn(player, enemy);
+        }
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::R))
-    {
-        //playerAttack(player);
-    }
+
+    updateInfoText(player, enemy);
+
+    heldKey = attackKeyNow;
+ 
 }
 
 void Battle::draw(sf::RenderWindow& window)
 {
     window.draw(overlay);
-    //window.draw(battleActions);
     window.draw(actionSprite);
     window.draw(playerBattleSprite);
+    window.draw(enemyBattleSprite);
     window.draw(menu);
     window.draw(info);
 }
 
-void Battle::playerAttack(Player& player)
+void Battle::playerAttack(Player& player, Enemy& enemy)
 {
-    int damage = player.getAttack();
-    //enemy.takeDamage(damage);
+    int damage = player.getAttack() - enemy.getDefense();
+    enemy.takeDamage(damage);
 
-    info.setString("Player attcked for " + to_string(damage) +
-                    " damage.\nEnemy HP: " ); /*enemy.getHP()*/
+}
+
+void Battle::enemyTurn(Player& player, Enemy& enemy)
+{
+    int damage = enemy.getAttack() - player.getDefense();
+    player.takeDamge(damage);
+}
+void Battle::updateInfoText(Player& player, Enemy& enemy)
+{
+    int playerDamage = enemy.getAttack() - player.getDefense();
+    int enemyDamage = player.getAttack() - enemy.getDefense();
+
+    info.setString("Player attacks for " + to_string(enemyDamage) + " damage.\t\tEnemy attacks for " + to_string(playerDamage) + 
+    " damage.\nEnemy HP: " + to_string(enemy.getHp()) + "\t\t\t\t\t\t\t  Player HP: " + to_string(player.getHp()) 
+    + "/" + to_string(player.getMaxHp()));
+}
+bool Battle::enemyDefeated(Enemy& enemy)const
+{
+    if(enemy.getHp() == 0)
+    {
+        return true;
+    }
+    else
+        return false;
     
-}
-
-void Battle::enemyTurn(Player& player)
-{
-    cout << "Enemy attacked!\n"
-        << "Player HP: " << player.getHp() << "/" << player.getMaxHp() << endl;
-}
-      
-bool Battle::enemyDefeated()const
-{
-    return false;
 }

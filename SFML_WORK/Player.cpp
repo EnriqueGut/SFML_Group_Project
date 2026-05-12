@@ -64,14 +64,12 @@ void Player::setAttack(int attack)
 
 void Player::takeDamge(int damage)
 {
-    int actualDamage = damage - defense;
-
-    if (actualDamage <= 0)
+    if (damage <= 0)
     {
-        actualDamage = 0;
+        damage = 0;
     }
     
-    hp -= actualDamage;
+    hp -= damage;
 
     if(hp <= 0)
     {
@@ -83,12 +81,13 @@ void Player::takeDamge(int damage)
 void Player::loadSprite() 
 {    
     texture.loadFromFile("Assets/Characters/Basic Charakter Spritesheet.png");
+    
     sprite.setTexture(texture);
 
     sprite.setTextureRect(sf::IntRect({17,16},{16,16}));
 
     sprite.setScale({3.f, 3.f});
-    sprite.setPosition({100.f, 100.f});
+    sprite.setPosition({105.f, 105.f});
 
 }
 void Player::update(float dt)
@@ -117,6 +116,11 @@ void Player::update(float dt)
         sprite.move({ 0.f ,distance });
         sprite.setTextureRect(sf::IntRect({17,16},{17,17}));
     }
+}
+
+sf::Vector2f Player::getPosition()const
+{
+    return sprite.getPosition();
 }
 void Player::draw(RenderWindow& window)const
 {

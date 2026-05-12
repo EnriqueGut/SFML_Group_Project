@@ -11,7 +11,7 @@ public:
     Game();
     void run();
     void processEvents();
-    void update(float dt);
+    void update(float dt, Player& player, Enemy& enemy);
     void render();
     void startBattle();
     void Music();
@@ -19,12 +19,12 @@ public:
 private:
     
     Player player;
+    Enemy enemy;
     Map map;
     sf::RenderWindow window;
     float fps_max;
     float dt_min;
     sf::Music overworldMusic;
-    //std::vector<Enemy> enemies;
     bool inBattle = false;
     Battle battle;
      

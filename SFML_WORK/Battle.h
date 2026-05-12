@@ -3,32 +3,37 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Enemy.h"
+
 class Battle
 {
     public:
         Battle();
-        void update(float dt, Player& player);
+        void update(float dt, Player& player, Enemy& enemy);
         void draw(sf::RenderWindow& window);
         
-        void playerAttack(Player& player); /*Enemy& Enemy*/
+        void playerAttack(Player& player, Enemy& enemy); 
         
-        
-        void enemyTurn(Player& player); /*Enemy& Enemy*/
+        void updateInfoText(Player& player, Enemy& enemy);
 
-        bool enemyDefeated()const;
+        void enemyTurn(Player& player, Enemy& enemy); 
+
+        bool enemyDefeated(Enemy& enemy )const;
 
     private:
+
+        bool heldKey;
         
         sf::RectangleShape overlay;
         sf::Texture actionTexture;
         sf::Sprite actionSprite;
+
         sf::Texture battleSprite;
         sf::Sprite playerBattleSprite;
 
-        /*
-        sf::Textute enemyBattle;
+        sf::Texture enemyBattle;
         sf::Sprite enemyBattleSprite;
-        */
+        
 
         sf::Font font;
         sf::Text menu;

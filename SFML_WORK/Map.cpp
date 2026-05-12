@@ -11,6 +11,7 @@ Map::Map()
     tileSize = 15;
     tileGrid = std::vector<std::vector<int>>(height, std::vector<int>(width, 0));
     GRASS = sf::Texture ("Assets/Tilesets/Grass.png");
+    loadMap();
 }
 
 void Map::loadMap()

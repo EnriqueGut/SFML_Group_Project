@@ -5,17 +5,23 @@
 #include "Game.h"
 #include "Map.h"
 #include "Player.h"
-#include "Battle.h"
+#include "Enemy.h"
 #include <iostream>
+#include <cmath>
 
 
 Game::Game(): window(sf::VideoMode({810, 810}), "Title", sf::Style::Default)
 {
     fps_max = 60.f;
     dt_min = 1.f / fps_max;
+    player.setHp(100);
     player.setAttack(10);
     player.setMaxHp(100);
     player.setDefense(5);
+
+    enemy.setHp(100);
+    enemy.setAttack(11);
+    enemy.setDefense(2);
     Music();
 }
 
@@ -34,7 +40,7 @@ void Game::run()
             clock.restart();
 
             processEvents();
-            update(dt);
+            update(dt, player, enemy);
             
             render();
         }
@@ -50,14 +56,16 @@ void Game::processEvents()
     }
 }
 
-void Game::update(float dt)
+void Game::update(float dt, Player& player, Enemy& enemy)
 {
     
     if (!inBattle)
     {
         player.update(dt);
         
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::B))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::B) && 
+        abs((player.getPosition().x - enemy.getPosition().x)) <= 70 && 
+        abs((player.getPosition().y - enemy.getPosition().y)) <= 70) 
         {
             inBattle = true;
         }
@@ -65,31 +73,18 @@ void Game::update(float dt)
 
     else 
     {
-        battle.update(dt, player);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
-        {
-            battle.playerAttack(player);
-        }
-        
-        if(battle.enemyDefeated())
+        battle.update(dt, player, enemy);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::R))
         {
             inBattle = false;
         }
+        if(battle.enemyDefeated(enemy))
+        {
+            inBattle = false;
+        }
+
     }
 
-    else
-    {
-        battle.update(dt, player);
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
-        {
-            battle.playerAttack(player);
-        }
-        
-        if(battle.enemyDefeated())
-        {
-            inBattle = false;
-        }
-    }
 }
 
 void Game::render()
@@ -98,6 +93,11 @@ void Game::render()
     
     
     map.draw(window);
+    if(enemy.getHp() > 0)
+    {
+        enemy.draw(window);
+    }
+    //enemy.draw(window);
     player.draw(window);
     
     if (inBattle)
@@ -108,20 +108,14 @@ void Game::render()
     window.display();
 }
 
-void Game::startBattle()
-{
-    
-}
-
-
 void Game::Music()
 {
-    /*
-    if(!overworldMusic.openFromFile("/Users/periwinkle12/Documents/School/Computer-science/Css-2A/Group_Project1/SFML_Group_Project/SFML_WORK/Music/Idkrickysoverworldsong.ogg"))
+    
+    if(!overworldMusic.openFromFile("C:/Users/eguti/CSS-2A/SFML_Group_Project/SFML_WORK/Music/Idkrickysoverworldsong.ogg"))
     {
         std::cout << "Failed to load music\n";
     }
 
     overworldMusic.play();
-     */
+    
 }
